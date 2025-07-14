@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>聖谷兒童主日學智慧系統</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- 導航列 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <!-- Logo 區域 -->
+            <div class="nav-logo">
+                <span class="logo-icon">⛪</span>
+                <span class="logo-text">聖谷兒童主日學</span>
+            </div>
+            
+            <!-- 導航選單 -->
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#home" class="nav-link active">首頁</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#registration" class="nav-link">新朋友報到</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#attendance" class="nav-link">智慧點名</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#points" class="nav-link">點數系統</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#admin" class="nav-link">後台管理</a>
+                </li>
+            </ul>
+            
+            <!-- 老師登入按鈕 -->
+            <div class="nav-auth">
+                <button class="teacher-login-btn" onclick="showTeacherLogin()">
+                    👨‍🏫 老師登入
+                </button>
+            </div>
+            
+            <!-- 手機選單按鈕 -->
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主要內容區域 -->
+    <main class="main-content">
+        <!-- 英雄區域 -->
+        <section id="home" class="hero-section">
+            <div class="hero-container">
+                <div class="hero-content">
+                    <h1 class="hero-title">Sunnyvale Church</h1>
+                    <p class="hero-subtitle">報到｜點名｜加分｜兌換，全自動搞定！</p>
+                    
+                    <div class="hero-buttons">
+                        <button class="cta-button primary" onclick="startRegistration()">
+                            🏠 我要報到！
+                        </button>
+                        <button class="cta-button secondary" onclick="checkPoints()">
+                            📊 點數查詢
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 新朋友報到區域 -->
+        <section id="registration" class="registration-section">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-icon">😊</div>
+                    <h2 class="section-title">新朋友報到不再手寫！</h2>
+                    <p class="section-subtitle">簡單三步驟，輕鬆完成報到</p>
+                </div>
+                
+                <div class="steps-container">
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <div class="step-icon">📱</div>
+                        <h3 class="step-title">掃描QR碼</h3>
+                        <p class="step-description">使用手機掃描教室內的QR碼</p>
+                    </div>
+                    
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <div class="step-icon">✍️</div>
+                        <h3 class="step-title">填寫資料</h3>
+                        <p class="step-description">輸入基本資料，系統自動記錄</p>
+                    </div>
+                    
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <div class="step-icon">🎉</div>
+                        <h3 class="step-title">完成報到</h3>
+                        <p class="step-description">立即獲得專屬QR碼，開始累積點數</p>
+                    </div>
+                </div>
+                
+                <div class="registration-form-container" id="registrationForm" style="display: none;">
+                    <div class="form-card">
+                        <h3>新朋友報到表單</h3>
+                        <form id="newStudentForm">
+                            <div class="form-group">
+                                <label for="studentName">小朋友姓名 *</label>
+                                <input type="text" id="studentName" name="studentName" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="studentAge">年齡</label>
+                                <select id="studentAge" name="studentAge">
+                                    <option value="">請選擇</option>
+                                    <option value="3-4">3-4歲</option>
+                                    <option value="5-6">5-6歲</option>
+                                    <option value="7-8">7-8歲</option>
+                                    <option value="9-10">9-10歲</option>
+                                    <option value="11-12">11-12歲</option>
+                                    <option value="13+">13歲以上</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="parentName">家長姓名 *</label>
+                                <input type="text" id="parentName" name="parentName" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="parentPhone">聯絡電話 *</label>
+                                <input type="tel" id="parentPhone" name="parentPhone" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="emergencyContact">緊急聯絡人</label>
+                                <input type="text" id="emergencyContact" name="emergencyContact">
+                            </div>
+                            
+                            <div class="form-actions">
+                                <button type="button" class="btn-secondary" onclick="hideRegistrationForm()">取消</button>
+                                <button type="submit" class="btn-primary">完成報到</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 智慧點名區域 -->
+        <section id="attendance" class="attendance-section">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-icon">📱</div>
+                    <h2 class="section-title">智慧點名系統</h2>
+                    <p class="section-subtitle">QR碼掃描，一秒完成點名</p>
+                </div>
+                
+                <div class="attendance-container">
+                    <div class="attendance-card">
+                        <h3>學生點名</h3>
+                        <p>掃描學生的專屬QR碼進行點名</p>
+                        <button class="feature-button" onclick="startAttendanceScanning()">
+                            📷 開始掃碼點名
+                        </button>
+                    </div>
+                    
+                    <div class="attendance-card">
+                        <h3>點名記錄</h3>
+                        <p>查看今日點名狀況和統計</p>
+                        <button class="feature-button" onclick="viewAttendanceRecords()">
+                            📋 查看記錄
+                        </button>
+                    </div>
+                    
+                    <div class="attendance-card">
+                        <h3>生成QR碼</h3>
+                        <p>為新學生建立專屬QR碼</p>
+                        <button class="feature-button" onclick="generateQRCode()">
+                            🎯 生成QR碼
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- QR碼掃描區域 -->
+                <div class="scanner-container" id="scannerContainer" style="display: none;">
+                    <div class="scanner-card">
+                        <h3>QR碼掃描點名</h3>
+                        <div class="scanner-area">
+                            <video id="qr-video" autoplay playsinline></video>
+                            <div class="scanner-overlay">
+                                <div class="scanner-frame"></div>
+                            </div>
+                        </div>
+                        <div class="scanner-controls">
+                            <button class="btn-secondary" onclick="stopScanning()">停止掃描</button>
+                            <button class="btn-primary" onclick="switchCamera()">切換相機</button>
+                        </div>
+                        <div class="scan-result" id="scanResult"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 點數系統區域 -->
+        <section id="points" class="points-section">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-icon">🏆</div>
+                    <h2 class="section-title">點數系統</h2>
+                    <p class="section-subtitle">出席、參與、表現都能獲得點數</p>
+                </div>
+                
+                <div class="points-container">
+                    <div class="points-card">
+                        <h3>點數查詢</h3>
+                        <div class="points-input">
+                            <input type="text" id="studentIdInput" placeholder="請輸入學生編號">
+                            <button class="btn-primary" onclick="queryPoints()">查詢</button>
+                        </div>
+                        <div class="points-result" id="pointsResult"></div>
+                    </div>
+                    
+                    <div class="points-card">
+                        <h3>點數排行榜</h3>
+                        <div class="leaderboard" id="leaderboard">
+                            <div class="loading">載入中...</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 頁尾 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>聖谷兒童主日學</h4>
+                    <p>用愛陪伴每個孩子成長</p>
+                </div>
+                <div class="footer-section">
+                    <h4>聯絡我們</h4>
+                    <p>📧 sunday.school@sunnyvale.church</p>
+                    <p>📞 (408) 123-4567</p>
+                </div>
+                <div class="footer-section">
+                    <h4>服務時間</h4>
+                    <p>每週日 9:00 AM - 12:00 PM</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Sunnyvale Church. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 載入JavaScript -->
+    <script src="https://unpkg.com/qr-scanner@1.4.2/qr-scanner.umd.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
+
